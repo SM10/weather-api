@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="header">
+        <div id="header-content" class="page-width">
+            <h2>Toronto's Weather</h2>
+        </div>
+    </div>
+    <div id="content">
+        <div id="body-content" class="page-width">
+            <table id="weather_table" class="table">
+                <tr id="title">
+                    <td class="cell_city_name">Toronto</td>
+                    <td class="cell_city_name">Montreal</td>
+                    <td class="cell_city_name">Ottawa</td>
+                    <td class="cell_city_name">Vancouver</td>
+                    <td class="cell_city_name">Banf</td>
+                </tr>
+                <tr id="title">
+                    <td class="cell_time">Toronto</td>
+                    <td class="cell_time">Montreal</td>
+                    <td class="cell_time">Ottawa</td>
+                    <td class="cell_time">Vancouver</td>
+                    <td class="cell_time">Banf</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="footer">
+        <div id="footer-content" class="page-width">
+
+        </div>
+    </div>
+    <script>
+        let p = document.querySelector('#returnedvalue')
+        p.textContent = "test"
+        let current_temp = document.querySelector('#current_temp')
+
+        async function getInfo(){
+
+        try{
+            const response = await fetch('https://api.weatherapi.com/v1/current.json?q=toronto&key=dfcb29365a8240cc9a2202710232406', {mode:"cors"})
+            const json = await response.json();
+            current_temp.textContent = json.current.temp_c;
+        }catch(error){
+            p.textContent = error
+        }
+        }
+
+        getInfo()
+    </script>
+</body>
+</html>
